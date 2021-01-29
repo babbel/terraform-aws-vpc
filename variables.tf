@@ -4,6 +4,20 @@ variable "cidr_block" {
   type = string
 }
 
+variable "create_db_subnet_group" {
+  description = "Whether to create a DB subnet group"
+
+  type    = bool
+  default = false
+}
+
+variable "create_elasticache_subnet_group" {
+  description = "Whether to create an ElastiCache subnet group"
+
+  type    = bool
+  default = false
+}
+
 variable "name" {
   description = "Name to be used in all `Name` tags shown in the AWS Console"
 
@@ -15,7 +29,7 @@ variable "size" {
 Number of availability zones to cover
 
 This will be also the number public-private subnet pairs to create.
-For any Multi-AZ resources (RDS, ElatiCache), this number must be at least 2.
+If subnet groups for RDS and/or ElastiCache shall be created, the number must be at least 2.
 EOS
 
   type = number

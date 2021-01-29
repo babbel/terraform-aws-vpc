@@ -38,6 +38,8 @@ module "availability_zone" {
 # Subnet Groups (RDS, ElastiCache)
 
 resource "aws_db_subnet_group" "this" {
+  count = var.create_db_subnet_group ? 1 : 0
+
   name        = var.name
   description = var.name
 
@@ -47,6 +49,8 @@ resource "aws_db_subnet_group" "this" {
 }
 
 resource "aws_elasticache_subnet_group" "this" {
+  count = var.create_elasticache_subnet_group ? 1 : 0
+
   name        = var.name
   description = var.name
 
