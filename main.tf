@@ -32,7 +32,7 @@ module "availability_zone" {
   subnet_bits  = var.subnet_bits
   subnet_index = count.index
 
-  tag = var.tags
+  tags = var.tags
 }
 
 # Subnet Groups (RDS, ElastiCache)
