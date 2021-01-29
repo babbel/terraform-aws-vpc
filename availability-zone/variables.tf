@@ -29,6 +29,12 @@ EOS
   type = number
 }
 
+variable "tags" {
+  description = "Map of tags to assign to all resources supporting tags (in addition to the `Name` tag)"
+
+  type = map(string)
+}
+
 variable "vpc" {
   description = "VPC in which the subnets and routing tables will be created"
 
