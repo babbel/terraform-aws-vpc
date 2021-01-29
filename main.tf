@@ -69,7 +69,7 @@ resource "aws_vpc_endpoint" "gateway" {
 
   route_table_ids = module.availability_zone[*].private_route_table.id
 
-  tags = merge({ Name = "${var.name} ${each.key}" }, var.tags)
+  tags = merge({ Name = each.key }, var.tags)
 }
 
 # VPC Endpoints: type `Interface`
@@ -86,16 +86,20 @@ resource "aws_vpc_endpoint" "interface" {
   subnet_ids         = module.availability_zone[*].private_subnet.id
   security_group_ids = [aws_security_group.vpc-endpoints.id]
 
-  tags = merge({ Name = "${var.name} ${each.key}" }, var.tags)
+  tags = merge({ Name = each.key }, var.tags)
 }
 
 resource "aws_security_group" "vpc-endpoints" {
   vpc_id = aws_vpc.this.id
 
-  name        = "${var.name} vpc-endpoints"
-  description = "${var.name} vpc-endpoints"
+  name        = "vpc-endpoints"
+  description = "VPC Endpoints"
 
-  tags = merge({ Name = "${var.name} vpc-endpoints" }, var.tags)
+  tags = merge({ Name = "VPC Endpoints" }, var.tags)
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_security_group_rule" "vpc-endpoints-ingress" {
@@ -107,6 +111,10 @@ resource "aws_security_group_rule" "vpc-endpoints-ingress" {
   from_port = 443
   to_port   = 443
   protocol  = "tcp"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_security_group_rule" "vpc-endpoints-egress" {
@@ -118,4 +126,8 @@ resource "aws_security_group_rule" "vpc-endpoints-egress" {
   from_port = 0
   to_port   = 0
   protocol  = "-1"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
