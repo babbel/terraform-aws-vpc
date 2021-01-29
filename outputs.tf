@@ -1,4 +1,4 @@
-output "vpc" {
+output "this" {
   description = "VPC"
   value       = aws_vpc.this
 }
