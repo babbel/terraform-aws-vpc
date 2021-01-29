@@ -3,7 +3,7 @@ data "aws_region" "current" {}
 # VPC
 
 resource "aws_vpc" "this" {
-  cidr_block = var.vpc_cidr_block
+  cidr_block = var.cidr_block
 
   # required for VPC endpoints with type `Interface`
   enable_dns_support   = true
