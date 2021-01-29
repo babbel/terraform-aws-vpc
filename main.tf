@@ -41,7 +41,7 @@ resource "aws_db_subnet_group" "this" {
   name        = var.name
   description = var.name
 
-  subnet_ids = module.availability_zone.private_subnet[*].id
+  subnet_ids = module.availability_zone[*].private_subnet.id
 
   tags = var.tags
 }
@@ -50,7 +50,7 @@ resource "aws_elasticache_subnet_group" "this" {
   name        = var.name
   description = var.name
 
-  subnet_ids = module.availability_zone.private_subnet[*].id
+  subnet_ids = module.availability_zone[*].private_subnet.id
 }
 
 # VPC Endpoints: type `Gateway`
@@ -63,7 +63,7 @@ resource "aws_vpc_endpoint" "gateway" {
   service_name      = "com.amazonaws.${data.aws_region.current.name}.${each.key}"
   vpc_endpoint_type = "Gateway"
 
-  route_table_ids = module.availability_zone.private_route_table[*].id
+  route_table_ids = module.availability_zone[*].private_route_table.id
 
   tags = merge({ Name = "${var.name} ${each.key}" }, var.tags)
 }
@@ -79,7 +79,7 @@ resource "aws_vpc_endpoint" "interface" {
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
 
-  subnet_ids         = module.availability_zone.private_subnet[*].id
+  subnet_ids         = module.availability_zone[*].private_subnet.id
   security_group_ids = [aws_security_group.vpc-endpoints.id]
 
   tags = merge({ Name = "${var.name} ${each.key}" }, var.tags)
