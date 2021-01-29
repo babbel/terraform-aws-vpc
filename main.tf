@@ -87,6 +87,11 @@ resource "aws_vpc_endpoint" "interface" {
   security_group_ids = [aws_security_group.vpc-endpoints.id]
 
   tags = merge({ Name = each.key }, var.tags)
+
+  depends_on = [
+    aws_security_group_rule.vpc-endpoints-ingress,
+    aws_security_group_rule.vpc-endpoints-egress,
+  ]
 }
 
 resource "aws_security_group" "vpc-endpoints" {
