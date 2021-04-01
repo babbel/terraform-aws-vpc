@@ -84,31 +84,35 @@ resource "aws_vpc_endpoint" "interface" {
   private_dns_enabled = true
 
   subnet_ids         = module.availability_zone[*].private_subnet.id
-  security_group_ids = [aws_security_group.vpc-endpoints.id]
+  security_group_ids = [aws_security_group.vpc-endpoints-interface[0].id]
 
   tags = merge({ Name = each.key }, var.tags)
 
   depends_on = [
-    aws_security_group_rule.vpc-endpoints-ingress,
-    aws_security_group_rule.vpc-endpoints-egress,
+    aws_security_group_rule.vpc-endpoints-interface-ingress,
+    aws_security_group_rule.vpc-endpoints-interface-egress,
   ]
 }
 
-resource "aws_security_group" "vpc-endpoints" {
+resource "aws_security_group" "vpc-endpoints-interface" {
+  count = length(var.vpc_endpoints.interface) > 0 ? 1 : 0
+
   vpc_id = aws_vpc.this.id
 
-  name        = "vpc-endpoints"
-  description = "VPC Endpoints"
+  name        = "vpc-endpoints-interface"
+  description = "VPC Endpoints Interface"
 
-  tags = merge({ Name = "VPC Endpoints" }, var.tags)
+  tags = merge({ Name = "VPC Endpoints Interface" }, var.tags)
 
   lifecycle {
     create_before_destroy = true
   }
 }
 
-resource "aws_security_group_rule" "vpc-endpoints-ingress" {
-  security_group_id = aws_security_group.vpc-endpoints.id
+resource "aws_security_group_rule" "vpc-endpoints-interface-ingress" {
+  count = length(var.vpc_endpoints.interface) > 0 ? 1 : 0
+
+  security_group_id = aws_security_group.vpc-endpoints-interface[count.index].id
 
   cidr_blocks = [aws_vpc.this.cidr_block]
 
@@ -122,8 +126,10 @@ resource "aws_security_group_rule" "vpc-endpoints-ingress" {
   }
 }
 
-resource "aws_security_group_rule" "vpc-endpoints-egress" {
-  security_group_id = aws_security_group.vpc-endpoints.id
+resource "aws_security_group_rule" "vpc-endpoints-interface-egress" {
+  count = length(var.vpc_endpoints.interface) > 0 ? 1 : 0
+
+  security_group_id = aws_security_group.vpc-endpoints-interface[count.index].id
 
   cidr_blocks = ["0.0.0.0/0"]
 
