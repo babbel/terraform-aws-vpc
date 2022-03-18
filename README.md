@@ -11,7 +11,7 @@ In addition, VPC endpoints (both `Gateway` and `Interface`) can be created.
 ```tf
 module "vpc" {
   source  = "babbel/vpc/aws"
-  version = "~> 1.0"
+  version = "~> 1.1"
 
   name       = "example"
   cidr_block = "10.0.0.0/16"
