@@ -45,7 +45,8 @@ variable "subnet_bits" {
 variable "tags" {
   description = "Map of tags to assign to all resources supporting tags (in addition to the `Name` tag)"
 
-  type = map(string)
+  type    = map(string)
+  default = {}
 }
 
 variable "vpc_endpoints" {
