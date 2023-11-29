@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.2.2
+
+- [replace deprecated `vpc` attribute with `domain`](https://github.com/babbel/terraform-aws-vpc/pull/23)
+
 ## v1.2.1
 
 - [Provide empty map as default for `tags` variable](https://github.com/babbel/terraform-aws-vpc/pull/20)
