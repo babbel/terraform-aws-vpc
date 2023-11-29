@@ -36,7 +36,7 @@ resource "aws_route_table_association" "public" {
 # NAT Gateway
 
 resource "aws_eip" "this" {
-  vpc = true
+  domain = "vpc"
 
   tags = merge({ Name = local.availability_zone }, var.tags)
 }
