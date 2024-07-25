@@ -1,4 +1,7 @@
-# Changelog
+# NOTE: CHANGELOG.md is deprecated
+
+After the release of v1.2.2, please see the [GitHub release notes](https://github.com/babbel/terraform-aws-vpc/releases)
+for the module in order to view the most up-to-date changes.
 
 ## v1.2.2
 
