@@ -14,7 +14,7 @@ module "vpc" {
     interface = ["logs"]
   }
 
-  tags = {
+  default_tags = {
     app = "example"
     env = "production"
   }
