@@ -42,6 +42,33 @@ Map of tags assigned to all AWS resources created by this module.
 EOS
 }
 
+variable "gateway_vpc_endpoint_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the VPC Endpoints with type `Gateway` created by this module. Tags in this map will override tags in `var.default_tags`.
+EOS
+}
+
+variable "interface_vpc_endpoint_security_group_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the security groups of the VPC Endpoints with type `Interface` created by this module. Tags in this map will override tags in `var.default_tags`.
+EOS
+}
+
+variable "interface_vpc_endpoint_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the VPC Endpoints with type `Interface` created by this module. Tags in this map will override tags in `var.default_tags`.
+EOS
+}
+
 variable "internet_gateway_tags" {
   type    = map(string)
   default = {}
@@ -148,33 +175,6 @@ Service name identifiers for the VPC endpoints.
 
 Every VPC endpoint belongs to a service name like `com.amazonaws.REGION.IDENTIFIER`.
 The lists of this variable (grouped by VPC endpoint type) are expecting just the `IDENTIFIER` of the service name.
-EOS
-}
-
-variable "vpc_gateway_endpoint_tags" {
-  type    = map(string)
-  default = {}
-
-  description = <<EOS
-Map of tags assigned to the VPC Endpoints with type `Gateway` created by this module. Tags in this map will override tags in `var.default_tags`.
-EOS
-}
-
-variable "interface_vpc_endpoint_security_group_tags" {
-  type    = map(string)
-  default = {}
-
-  description = <<EOS
-Map of tags assigned to the security groups of the VPC Endpoints with type `Interface` created by this module. Tags in this map will override tags in `var.default_tags`.
-EOS
-}
-
-variable "interface_vpc_endpoint_tags" {
-  type    = map(string)
-  default = {}
-
-  description = <<EOS
-Map of tags assigned to the VPC Endpoints with type `Interface` created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
