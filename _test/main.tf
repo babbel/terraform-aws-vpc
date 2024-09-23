@@ -17,5 +17,5 @@ module "vpc" {
   tags = {
     app = "example"
     env = "production"
-  }  
+  }
 }
