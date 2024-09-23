@@ -22,7 +22,7 @@ variable "nat_gateway_eip_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the EIP of the NAT Gateway.
+Map of tags assigned to the EIP of the NAT Gateway created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -31,7 +31,7 @@ variable "nat_gateway_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the NAT Gateway.
+Map of tags assigned to the NAT Gateway created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -40,7 +40,7 @@ variable "private_route_table_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the private route table.
+Map of tags assigned to the private route table created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -49,7 +49,7 @@ variable "private_subnet_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the private subnet.
+Map of tags assigned to the private subnet created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -58,7 +58,7 @@ variable "public_route_table_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the public route table.
+Map of tags assigned to the public route table created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -67,7 +67,7 @@ variable "public_subnet_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the public subnet.
+Map of tags assigned to the public subnet created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 

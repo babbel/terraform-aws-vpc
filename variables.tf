@@ -3,7 +3,7 @@ variable "db_subnet_group_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the DB subnet group.
+Map of tags assigned to the DB subnet group created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -47,7 +47,7 @@ variable "internet_gateway_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the Internet Gateway.
+Map of tags assigned to the Internet Gateway created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -64,7 +64,7 @@ variable "nat_gateway_eip_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the EIPs of the NAT Gateways.
+Map of tags assigned to the EIPs of the NAT Gateways created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -73,7 +73,7 @@ variable "nat_gateway_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the NAT Gateways.
+Map of tags assigned to the NAT Gateways created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -82,7 +82,7 @@ variable "private_route_table_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the private route tables.
+Map of tags assigned to the private route tables created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -91,7 +91,7 @@ variable "private_subnet_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the private subnets.
+Map of tags assigned to the private subnets created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -100,7 +100,7 @@ variable "public_route_table_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the public route tables.
+Map of tags assigned to the public route tables created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -109,7 +109,7 @@ variable "public_subnet_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the public subnets.
+Map of tags assigned to the public subnets created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -156,7 +156,7 @@ variable "vpc_gateway_endpoint_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the VPC Endpoints with type `Gateway`.
+Map of tags assigned to the VPC Endpoints with type `Gateway` created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -165,7 +165,7 @@ variable "interface_vpc_endpoint_security_group_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the security groups of the VPC Endpoints with type `Interface`.
+Map of tags assigned to the security groups of the VPC Endpoints with type `Interface` created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -174,7 +174,7 @@ variable "interface_vpc_endpoint_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the VPC Endpoints with type `Interface`.
+Map of tags assigned to the VPC Endpoints with type `Interface` created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
 
@@ -183,6 +183,6 @@ variable "vpc_tags" {
   default = {}
 
   description = <<EOS
-Map of tags assigned to the VPC.
+Map of tags assigned to the VPC created by this module. Tags in this map will override tags in `var.default_tags`.
 EOS
 }
