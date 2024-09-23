@@ -24,6 +24,15 @@ Whether to create an ElastiCache subnet group.
 EOS
 }
 
+variable "default_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to all AWS resources created by this module.
+EOS
+}
+
 variable "name" {
   type = string
 
@@ -49,15 +58,6 @@ variable "subnet_bits" {
 
   description = <<EOS
 Number of bits to add to the VPC CIDR to get the size of the subnet CIDR.
-EOS
-}
-
-variable "tags" {
-  type    = map(string)
-  default = {}
-
-  description = <<EOS
-Map of tags assigned to all AWS resources created by this module.
 EOS
 }
 

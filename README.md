@@ -21,10 +21,5 @@ module "vpc" {
     gateway   = ["dynamodb", "s3"]
     interface = ["logs"]
   }
-
-  tags = {
-    app = "example"
-    env = "production"
-  }
 }
 ```
