@@ -17,6 +17,60 @@ Internet Gateway which belongs to `var.vpc`.
 EOS
 }
 
+variable "nat_gateway_eip_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the EIP of the NAT Gateway.
+EOS
+}
+
+variable "nat_gateway_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the NAT Gateway.
+EOS
+}
+
+variable "private_route_table_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the private route table.
+EOS
+}
+
+variable "private_subnet_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the private subnet.
+EOS
+}
+
+variable "public_route_table_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the public route table.
+EOS
+}
+
+variable "public_subnet_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the public subnet.
+EOS
+}
+
 variable "subnet_bits" {
   type = number
 

@@ -9,7 +9,9 @@ resource "aws_vpc" "this" {
   enable_dns_support   = true
   enable_dns_hostnames = true
 
-  tags = merge({ Name = var.name }, var.default_tags)
+  tags = merge({
+    Name = var.name
+  }, var.default_tags, var.vpc_tags)
 }
 
 # Internet Gateway
@@ -17,7 +19,9 @@ resource "aws_vpc" "this" {
 resource "aws_internet_gateway" "this" {
   vpc_id = aws_vpc.this.id
 
-  tags = merge({ Name = var.name }, var.default_tags)
+  tags = merge({
+    Name = var.name
+  }, var.default_tags, var.internet_gateway_tags)
 }
 
 # Pairs of Public-Private Subnets per Availability Zone
@@ -32,6 +36,13 @@ module "availability_zone" {
   subnet_bits  = var.subnet_bits
   subnet_index = count.index
 
+  nat_gateway_eip_tags     = var.nat_gateway_eip_tags
+  nat_gateway_tags         = var.nat_gateway_tags
+  private_route_table_tags = var.private_route_table_tags
+  private_subnet_tags      = var.private_subnet_tags
+  public_route_table_tags  = var.public_route_table_tags
+  public_subnet_tags       = var.public_subnet_tags
+
   default_tags = var.default_tags
 }
 
@@ -45,7 +56,7 @@ resource "aws_db_subnet_group" "this" {
 
   subnet_ids = module.availability_zone[*].private_subnet.id
 
-  tags = var.default_tags
+  tags = merge(var.default_tags, var.db_subnet_group_tags)
 }
 
 resource "aws_elasticache_subnet_group" "this" {
@@ -69,7 +80,9 @@ resource "aws_vpc_endpoint" "gateway" {
 
   route_table_ids = module.availability_zone[*].private_route_table.id
 
-  tags = merge({ Name = each.key }, var.default_tags)
+  tags = merge({
+    Name = each.key
+  }, var.default_tags, var.gateway_vpc_endpoint_tags)
 }
 
 # VPC Endpoints: type `Interface`
@@ -86,7 +99,9 @@ resource "aws_vpc_endpoint" "interface" {
   subnet_ids         = module.availability_zone[*].private_subnet.id
   security_group_ids = [aws_security_group.vpc-endpoints-interface[0].id]
 
-  tags = merge({ Name = each.key }, var.default_tags)
+  tags = merge({
+    Name = each.key
+  }, var.default_tags, var.interface_vpc_endpoint_tags)
 
   depends_on = [
     aws_security_group_rule.vpc-endpoints-interface-ingress,
@@ -102,7 +117,9 @@ resource "aws_security_group" "vpc-endpoints-interface" {
   name        = "vpc-endpoints-interface"
   description = "VPC Endpoints Interface"
 
-  tags = merge({ Name = "VPC Endpoints Interface" }, var.default_tags)
+  tags = merge({
+    Name = "VPC Endpoints Interface"
+  }, var.default_tags, var.interface_vpc_endpoint_security_group_tags)
 
   lifecycle {
     create_before_destroy = true
