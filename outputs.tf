@@ -1,11 +1,11 @@
 output "db_subnet_group" {
   description = "DB subnet group containing all private subnets"
-  value = var.create_db_subnet_group ? aws_db_subnet_group.this[0] : null
+  value       = var.create_db_subnet_group ? aws_db_subnet_group.this[0] : null
 }
 
 output "elasticache_subnet_group" {
   description = "ElastiCache subnet group containing all private subnets"
-  value = var.create_elasticache_subnet_group ? aws_elasticache_subnet_group.this[0] : null
+  value       = var.create_elasticache_subnet_group ? aws_elasticache_subnet_group.this[0] : null
 }
 
 output "private_subnets" {
