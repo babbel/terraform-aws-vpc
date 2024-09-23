@@ -1,3 +1,12 @@
+variable "default_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to all AWS resources created by this module.
+EOS
+}
+
 variable "internet_gateway" {
   type = object({
     id = string
@@ -28,15 +37,6 @@ This will be used in the `netnum` argument of [`cidrsubnet`](https://www.terrafo
 
 * for the public subnet, it will be `2 * var.subnet_index`,
 * for the private subnet, it will be `2 * var.subnet_index + 1`.
-EOS
-}
-
-variable "tags" {
-  type    = map(string)
-  default = {}
-
-  description = <<EOS
-Map of tags assigned to all AWS resources created by this module.
 EOS
 }
 
