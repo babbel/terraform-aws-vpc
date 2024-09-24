@@ -9,7 +9,9 @@ locals {
 resource "aws_route_table" "public" {
   vpc_id = var.vpc.id
 
-  tags = merge({ Name = "public - ${local.availability_zone}" }, var.default_tags)
+  tags = merge({
+    Name = "public - ${local.availability_zone}"
+  }, var.default_tags, var.public_route_table_tags)
 }
 
 resource "aws_route" "internet_gateway" {
@@ -25,7 +27,9 @@ resource "aws_subnet" "public" {
   availability_zone       = local.availability_zone
   map_public_ip_on_launch = true
 
-  tags = merge({ Name = "public - ${local.availability_zone}" }, var.default_tags)
+  tags = merge({
+    Name = "public - ${local.availability_zone}"
+  }, var.default_tags, var.public_subnet_tags)
 }
 
 resource "aws_route_table_association" "public" {
@@ -38,14 +42,18 @@ resource "aws_route_table_association" "public" {
 resource "aws_eip" "this" {
   domain = "vpc"
 
-  tags = merge({ Name = local.availability_zone }, var.default_tags)
+  tags = merge({
+    Name = local.availability_zone
+  }, var.default_tags, var.nat_gateway_eip_tags)
 }
 
 resource "aws_nat_gateway" "this" {
   subnet_id     = aws_subnet.public.id
   allocation_id = aws_eip.this.id
 
-  tags = merge({ Name = local.availability_zone }, var.default_tags)
+  tags = merge({
+    Name = local.availability_zone
+  }, var.default_tags, var.nat_gateway_tags)
 }
 
 # Private Subnet
@@ -53,7 +61,9 @@ resource "aws_nat_gateway" "this" {
 resource "aws_route_table" "private" {
   vpc_id = var.vpc.id
 
-  tags = merge({ Name = "private - ${local.availability_zone}" }, var.default_tags)
+  tags = merge({
+    Name = "private - ${local.availability_zone}"
+  }, var.default_tags, var.private_route_table_tags)
 }
 
 resource "aws_route" "nat_gateway" {
@@ -69,7 +79,9 @@ resource "aws_subnet" "private" {
   availability_zone       = local.availability_zone
   map_public_ip_on_launch = false
 
-  tags = merge({ Name = "private - ${local.availability_zone}" }, var.default_tags)
+  tags = merge({
+    Name = "private - ${local.availability_zone}"
+  }, var.default_tags, var.private_subnet_tags)
 }
 
 resource "aws_route_table_association" "private" {

@@ -17,6 +17,60 @@ Internet Gateway which belongs to `var.vpc`.
 EOS
 }
 
+variable "nat_gateway_eip_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the EIP of the NAT Gateway created by this module. Tags in this map will override tags in `var.default_tags`.
+EOS
+}
+
+variable "nat_gateway_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the NAT Gateway created by this module. Tags in this map will override tags in `var.default_tags`.
+EOS
+}
+
+variable "private_route_table_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the private route table created by this module. Tags in this map will override tags in `var.default_tags`.
+EOS
+}
+
+variable "private_subnet_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the private subnet created by this module. Tags in this map will override tags in `var.default_tags`.
+EOS
+}
+
+variable "public_route_table_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the public route table created by this module. Tags in this map will override tags in `var.default_tags`.
+EOS
+}
+
+variable "public_subnet_tags" {
+  type    = map(string)
+  default = {}
+
+  description = <<EOS
+Map of tags assigned to the public subnet created by this module. Tags in this map will override tags in `var.default_tags`.
+EOS
+}
+
 variable "subnet_bits" {
   type = number
 
