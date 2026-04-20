@@ -75,7 +75,7 @@ resource "aws_vpc_endpoint" "gateway" {
 
   vpc_id = aws_vpc.this.id
 
-  service_name      = "com.amazonaws.${data.aws_region.current.name}.${each.key}"
+  service_name      = "com.amazonaws.${data.aws_region.current.region}.${each.key}"
   vpc_endpoint_type = "Gateway"
 
   route_table_ids = module.availability_zone[*].private_route_table.id
@@ -92,7 +92,7 @@ resource "aws_vpc_endpoint" "interface" {
 
   vpc_id = aws_vpc.this.id
 
-  service_name        = "com.amazonaws.${data.aws_region.current.name}.${each.key}"
+  service_name        = "com.amazonaws.${data.aws_region.current.region}.${each.key}"
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
 
